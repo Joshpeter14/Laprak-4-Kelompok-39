@@ -93,3 +93,60 @@ int main() {
                 }
             }
         }
+else if (option == "2") {
+            while (true) {
+                std::string namabuku;
+                std::cout << "Masukkan nama buku yang dihapus (ketik 'kembali' untuk ke menu): ";
+                std::getline(std::cin, namabuku);
+
+                if (namabuku == "kembali") break;
+
+                auto it = std::find_if(bukus.begin(), bukus.end(),
+                    [&namabuku](const buku& w) {
+                        return std::equal(w.name.begin(), w.name.end(),
+                            namabuku.begin(), namabuku.end(),
+                            [](char a, char b) {
+                                return tolower(a) == tolower(b);
+                            });
+                    });
+
+                if (it != bukus.end()) {
+                    bukus.erase(it);
+                    std::cout << "buku berhasil dihapus." << std::endl;
+                }
+                else {
+                    std::cout << "buku tidak ditemukan." << std::endl;
+                }
+            }
+        }
+        else if (option == "3") {
+            std::string namabuku;
+            std::cout << "Masukkan nama buku untuk diperbarui: ";
+            std::getline(std::cin, namabuku);
+
+            std::string quantityStr;
+            std::cout << "Masukkan Jumlah untuk ditambah atau dikurang dari stok " << namabuku << ": ";
+            std::getline(std::cin, quantityStr);
+
+            try {
+                int quantity = std::stoi(quantityStr);
+                updateStokBuku(bukus, namabuku, quantity);
+            }
+            catch (const std::exception& e) {
+                std::cout << "Input tidak valid. Silakan coba lagi." << std::endl;
+            }
+        }
+        else if (option == "4") {
+            displaybukusStock(bukus);
+        }
+        else if (option == "5") {
+            std::cout << "Selamat Tinggal" << std::endl;
+            break;
+        }
+        else {
+            std::cout << "Invalid." << std::endl;
+        }
+    }
+
+    return 0;
+}
