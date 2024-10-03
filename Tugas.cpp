@@ -41,10 +41,10 @@ void updateStokBuku(std::vector<buku>& bukus, const std::string& namabuku, int q
 
 void displaybukusStock(const std::vector<buku>& bukus) {
     if (bukus.empty()) {
-        std::cout << "Senjata Tidak Tersedia." << std::endl;
+        std::cout << "Buku Tidak Tersedia." << std::endl;
     }
     else {
-        std::cout << "Stok Senjata:" << std::endl;
+        std::cout << "Stok Buku:" << std::endl;
         for (const auto& buku : bukus) {
             std::cout << "- " << buku.name << ": " << buku.stock << std::endl;
         }
